@@ -7,8 +7,8 @@ import FuzzerTests exposing (fuzzerTests)
 import Helpers exposing (..)
 import Random
 import RunnerTests
-import Shrink
-import ShrinkTests
+import Simplify
+import SimplifyTests
 import Test exposing (..)
 import Test.Runner
 import Test.Runner.Failure exposing (Reason(..))
@@ -23,7 +23,7 @@ all =
         , expectationTests
         , fuzzerTests
         , floatWithinTests
-        , ShrinkTests.all
+        , SimplifyTests.all
         , RunnerTests.all
         ]
 
@@ -101,7 +101,7 @@ regressions =
             -}
             \() ->
                 fuzz
-                    (custom (Random.int 1 8) Shrink.noShrink)
+                    (custom (Random.int 1 8) Simplify.noSimplify)
                     "fuzz tests run 100 times"
                     (Expect.notEqual 5)
                     |> expectTestToFail
